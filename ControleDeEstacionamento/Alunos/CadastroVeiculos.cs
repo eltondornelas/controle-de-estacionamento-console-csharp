@@ -5,10 +5,11 @@ using ControleDeEstacionamento.Menus;
 
 namespace ControleDeEstacionamento.Alunos
 {
-    class ControleVeiculos
+    class CadastroVeiculos
     {
+        /*
         Menu m = new Menu();
-
+        
         public void CadastrarVeiculo(Aluno aluno)
         {
             if (aluno.Veiculo.Placa == null)
@@ -21,7 +22,7 @@ namespace ControleDeEstacionamento.Alunos
                 Console.WriteLine("[1] Cadastrar Veículo \n[2] Cancelar \n\n");
                 int x = int.Parse(Console.ReadLine());
                 if (x == 2)
-                    m.TelaInicialCadastro();
+                    return;
                 else
                 {
                     Console.Clear();
@@ -36,9 +37,7 @@ namespace ControleDeEstacionamento.Alunos
 
                     Console.WriteLine("\nALUNO CADASTRADO COM SUCESSO! ");
                     Console.ReadLine();
-
-                    m.TelaInicialCadastro();
-
+                    
                 }
             }
 
@@ -68,8 +67,7 @@ namespace ControleDeEstacionamento.Alunos
                 }
             }
 
-            Console.ReadLine();
-
+            return;
         }
 
         public void AlterarVeiculo(Aluno aluno)
@@ -122,5 +120,6 @@ namespace ControleDeEstacionamento.Alunos
                 m.TelaInicialCadastro();
             }
         }
+        */
     }
 }
