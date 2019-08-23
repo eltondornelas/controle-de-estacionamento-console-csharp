@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using ControleDeEstacionamento.Alunos;
 
 
-
-
-
 namespace ControleDeEstacionamento.Menus
 {
     class Menu
@@ -15,10 +12,6 @@ namespace ControleDeEstacionamento.Menus
         public void Login() //futuramente terá que criar dois usuários: para cadastro e para consulta.
         {
             bool c = false;
-
-            //Veiculo veiculo;
-            //Veiculo padrao = new Veiculo("nenhum", "nenhum", "nenhum");
-
 
             alunos.Add(new Aluno("Elton", "08251920485", "2009108453", "Programacao", "1º", new Veiculo("PFX5107", "FORD", "FIESTA")));
             alunos.Add(new Aluno("Brivaldo", "15008673491", "2009108450", "Contabilidade", "8º", new Veiculo("nenhum", "nenhum", "nenhum")));
@@ -50,22 +43,29 @@ namespace ControleDeEstacionamento.Menus
 
             Usuario();
         }
-
+        //paradigmas de programação estruturado e orientação a objetos
         public void Usuario()
         {
+            bool c = true;
             int x;
 
             do
             {
                 try
-                {
+                {                    
                     Console.Clear();
 
                     Console.WriteLine("Deseja entrar em: \n\n[1] Sistema de Cadastro \n[2] Sistema de Controle de Entrada e Saída \n[3] Fechar Programa");
                     x = int.Parse(Console.ReadLine());
 
-                    if (x == 3)
-                        Environment.Exit(0);
+                    if (x < 1 || x > 3)
+                    {
+                        Console.WriteLine("\nOpção Inválida! 1");
+                        Console.ReadLine();
+                    }
+
+                    else if (x == 3)
+                        c = false;
 
                     else if (x == 1)
                     {
@@ -75,24 +75,23 @@ namespace ControleDeEstacionamento.Menus
                     {
                         UsuarioControleEstacionamento();
                         TelaInicialConsulta();
+                        c = false;
                     }
-
-                    Console.WriteLine("\nOpção Inválida! 1");
-                    Console.ReadLine();
+                    
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("Opção inválida! 2");
                     Console.ReadLine();
-                    x = 0;
+                    
                 }
 
-            } while (x < 1 || x > 3);
+            } while (c);
         }
 
         public void UsuarioControleEstacionamento()
         {
-            bool c = false;
+            bool c = true;
             do
             {
                 Console.Clear();
@@ -107,11 +106,10 @@ namespace ControleDeEstacionamento.Menus
                 string u = Console.ReadLine();
                 Console.Write("Senha: ");
                 string s = Console.ReadLine();
-
-                //pensar em criar uma função para confirmação de senha
+                
                 if (u == user && s == senha || u == user2 && s == senha2)
                 {
-                    c = true;
+                    c = false;
                 }
                 else
                 {
@@ -119,110 +117,102 @@ namespace ControleDeEstacionamento.Menus
                     Console.ReadLine();
                 }
 
-
-
-            } while (!c);
+            } while (c);
 
         }
 
         public void TelaInicialCadastro()
         {
-
-            //Aluno a = new Aluno();
-            /*
-            Veiculo veiculo;
-            Veiculo padrao = new Veiculo(null, null, null);
-
-
-            alunos.Add(new Aluno("Elton", "08251920485", "2009108453", "Programacao", "1º", veiculo = new Veiculo("PFX5107", "FORD", "FIESTA")));
-            alunos.Add(new Aluno("Brivaldo", "15008673491", "2009108450", "Contabilidade", "8º", padrao));
-            alunos.Add(new Aluno("Everton", "1234567890", "2009108320", "Engenharia", "10º", padrao));
-            alunos.Add(new Aluno("Paulo", "1345173491", "2009112450", "Nutricao", "5º", padrao));
-            alunos.Add(new Aluno("Amanda", "1531233491", "20429108450", "Direito", "3º", padrao));
-            */
-
+            
+            bool c = true;
             int x;
             do
             {
                 try
-                {
+                {                    
                     Console.Clear();
 
-                    Console.WriteLine("[1] Cadastrar Veículo \n[2] Consultar Veículo\n[3] Tela Inicial \n[4] Sair");
+                    Console.WriteLine("[1] Cadastrar Veículo \n[2] Consultar Veículo\n[3] Tela Inicial");
                     x = int.Parse(Console.ReadLine());
 
-                    switch (x)
+                    if (x < 1 || x > 3)
                     {
-                        case 1:
-                            ConsultarAluno();
-                            break;
-                        case 2:
-                            ConsultarVeiculo();
-                            break;
-                        case 3:
-                            Usuario();
-                            break;
-                        case 4:
-                            Environment.Exit(0);
-                            break;
+                        Console.WriteLine("Opção inválida! 3");
+                        Console.ReadLine();
                     }
-
-                    Console.WriteLine("Opção inválida! 3");
-                    Console.ReadLine();
-
+                    else
+                    {
+                        switch (x)
+                        {
+                            case 3:
+                                c = false;
+                                //Environment.Exit(0);
+                                break;
+                            case 1:
+                                ConsultarAluno();
+                                break;
+                            case 2:
+                                ConsultarVeiculo();
+                                break;                            
+                        }
+                    }
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("Opção inválida! 4");
-                    Console.ReadLine();
-                    x = 0;
+                    Console.ReadLine();                    
                 }
 
-            } while (x < 1 || x > 4);
+            } while (c);
         }
 
         public void ConsultarAluno()
         {
             Console.Clear();
 
+            bool c = true;
             int x;
             do
             {
                 try
-                {
+                {                    
                     Console.Clear();
 
                     Console.WriteLine("Deseja consultar por qual opção: ");
                     Console.WriteLine("[1] Nome \n[2] CPF \n[3] Matricula");
                     x = int.Parse(Console.ReadLine());
 
-                    switch (x)
+                    if (x < 1 || x > 3)
                     {
-                        case 1:
-                            ConsultarNome(alunos);
-                            break;
-                        case 2:
-                            ConsultarCPF(alunos);
-                            //pesquisar como limitar a digitação de caractere.
-                            break;
-                        case 3:
-                            ConsultarMatricula(alunos);
-                            break;
+                        Console.WriteLine("Opção inválida! 5");
+                        Console.ReadLine();
                     }
-
-                    Console.WriteLine("Opção inválida! 5");
-                    Console.ReadLine();
-
+                    else
+                    {
+                        switch (x)
+                        {
+                            case 1:
+                                ConsultarNome(alunos);
+                                c = false;
+                                break;
+                            case 2:
+                                ConsultarCPF(alunos);
+                                c = false;
+                                break;
+                            case 3:
+                                ConsultarMatricula(alunos);
+                                c = false;
+                                break;
+                        }
+                    }
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("Opção inválida! 6");
-                    Console.ReadLine();
-                    x = 0;
+                    Console.ReadLine();                    
                 }
 
-
-            } while (x < 1 || x > 3);
+            } while (c);
 
         }
 
@@ -238,14 +228,12 @@ namespace ControleDeEstacionamento.Menus
                 {
                     Console.WriteLine("Aluno é Cadastrado!");
                     Console.ReadLine();
-                    CadastrarVeiculo(a);
-                    TelaInicialCadastro();
+                    CadastrarVeiculo(a);                    
                     return;
                 }
 
             Console.WriteLine("Aluno NÃO Cadastrado!");
-            Console.ReadLine();
-            TelaInicialCadastro();
+            Console.ReadLine();            
         }
 
         public void ConsultarCPF(List<Aluno> alunos)
@@ -266,8 +254,6 @@ namespace ControleDeEstacionamento.Menus
 
             Console.WriteLine("Aluno NÃO Cadastrado!");
             Console.ReadLine();
-            TelaInicialCadastro();
-
         }
 
         public void ConsultarMatricula(List<Aluno> alunos)
@@ -288,7 +274,7 @@ namespace ControleDeEstacionamento.Menus
 
             Console.WriteLine("Aluno NÃO Cadastrado!");
             Console.ReadLine();
-            TelaInicialCadastro();
+            
         }
 
 
@@ -297,6 +283,7 @@ namespace ControleDeEstacionamento.Menus
             if (aluno.Veiculo.Placa == "nenhum")
             {
                 int x;
+                bool c = true;
                 do
                 {
                     try
@@ -308,10 +295,18 @@ namespace ControleDeEstacionamento.Menus
 
                         Console.WriteLine("[1] Cadastrar Veículo \n[2] Cancelar \n\n");
                         x = int.Parse(Console.ReadLine());
-                        if (x == 2)
-                            TelaInicialCadastro();
 
-                        if (x == 1)
+                        if (x < 1 || x > 2)
+                        {
+                            Console.WriteLine("Opção inválida! 7");
+                            Console.ReadLine();
+                        }
+                        else if (x == 2)
+                        {
+                            c = false;
+                        }
+
+                        else if (x == 1)
                         {
                             Console.Clear();
                             Console.Write("Digite a placa do veículo: ");
@@ -324,28 +319,24 @@ namespace ControleDeEstacionamento.Menus
                             aluno.Veiculo.Modelo = Console.ReadLine().ToUpper();
 
                             Console.WriteLine("\nALUNO CADASTRADO COM SUCESSO! ");
-                            
+
                             Console.ReadLine();
-
-                            TelaInicialCadastro();
-                        }
-
-                        Console.WriteLine("Opção inválida! 7");
-                        Console.ReadLine();
+                            c = false;
+                        }                        
 
                     }
                     catch (Exception)
                     {
                         Console.WriteLine("Opção inválida! 8");
-                        Console.ReadLine();
-                        x = 0;
+                        Console.ReadLine();                        
                     }
 
-                } while (x < 1 || x > 2);
+                } while (c);
             }
 
             else
             {
+                bool c = true;
                 int x;
                 do
                 {
@@ -359,33 +350,39 @@ namespace ControleDeEstacionamento.Menus
                         Console.WriteLine("[1] Alterar Veículo \n[2] Remover Veículo \n[3] Cancelar \n");
                         x = int.Parse(Console.ReadLine());
 
-                        switch (x)
+                        if (x < 1 || x > 3)
                         {
-                            case 3:
-                                TelaInicialCadastro();
-                                break;
-
-                            case 1:
-                                AlterarVeiculo(aluno);
-                                break;
-
-                            case 2:
-                                RemoverVeiculo(aluno);
-                                break;
+                            Console.WriteLine("Opção inválida! 9");
+                            Console.ReadLine();
                         }
+                        else
+                        {
+                            switch (x)
+                            {
+                                case 3:
+                                    c = false; 
+                                    break;
 
-                        Console.WriteLine("Opção inválida! 9");
-                        Console.ReadLine();
+                                case 1:
+                                    AlterarVeiculo(aluno);
+                                    c = false;
+                                    break;
+
+                                case 2:
+                                    RemoverVeiculo(aluno);
+                                    c = false;
+                                    break;
+                            }
+                        }                        
 
                     }
                     catch (Exception)
                     {
                         Console.WriteLine("Opção inválida! 10");
-                        Console.ReadLine();
-                        x = 0;
+                        Console.ReadLine();                        
                     }
 
-                } while (x < 1 || x > 3);
+                } while (c);
             }
 
         }
@@ -408,13 +405,13 @@ namespace ControleDeEstacionamento.Menus
 
             Console.WriteLine("\nALTERAÇÃO DE VEÍCULO EXECUTADA COM SUCESSO! ");
             Console.ReadLine();
-
-            TelaInicialCadastro();
         }
 
         public void RemoverVeiculo(Aluno aluno)
         {
+            bool c = true;
             int x;
+
             do
             {
                 try
@@ -426,14 +423,19 @@ namespace ControleDeEstacionamento.Menus
 
                     Console.WriteLine("Tem certeza que deseja remover este veículo desse Aluno? \n\n[1] Sim \n[2] Não");
                     x = int.Parse(Console.ReadLine());
-                    if (x == 2)
+                    if (x < 1 || x > 2)
                     {
+                        Console.WriteLine("Opção inválida! 11");
+                        Console.ReadLine();
+                    }
 
+                    else if (x == 2)
+                    {
                         Console.WriteLine("\nOperação cancelada! ");
                         Console.ReadLine();
-                        TelaInicialCadastro();
+                        c = false;
                     }
-                    if (x == 1)
+                    else if (x == 1)
                     {
                         aluno.Veiculo.Placa = "nenhum";
                         aluno.Veiculo.Fabricante = "nenhum";
@@ -441,21 +443,16 @@ namespace ControleDeEstacionamento.Menus
 
                         Console.WriteLine("\nOPERAÇÃO REALIZADA COM SUCESSO! ");
                         Console.ReadLine();
-
-                        TelaInicialCadastro();
-                    }
-
-                    Console.WriteLine("Opção inválida! 11");
-                    Console.ReadLine();
+                        c = false;
+                    }                    
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("Opção inválida! 12");
-                    Console.ReadLine();
-                    x = 0;
+                    Console.ReadLine();                    
                 }
 
-            } while (x < 1 || x > 2);
+            } while (c);
         }
 
 
@@ -472,16 +469,14 @@ namespace ControleDeEstacionamento.Menus
                 {
                     Console.WriteLine("Veículo Cadastrado! \n");
                     Console.WriteLine(a);
-                    Console.ReadLine();
-                    TelaInicialCadastro();
+                    Console.ReadLine();                    
                     return;
                 }
 
             }
 
             Console.WriteLine("Veículo não é cadastrado!");
-            Console.ReadLine();
-            TelaInicialCadastro();
+            Console.ReadLine();            
         }
 
 
@@ -492,19 +487,8 @@ namespace ControleDeEstacionamento.Menus
 
         public void TelaInicialConsulta()
         {
-            /*
-            Veiculo veiculo;
-            Veiculo padrao = new Veiculo(null, null, null);
-
-            alunos.Add(new Aluno("Elton", "08251920485", "2009108453", "Programacao", "1º", veiculo = new Veiculo("PFX5107", "FORD", "FIESTA")));
-            alunos.Add(new Aluno("Brivaldo", "15008673491", "2009108450", "Contabilidade", "8º", padrao));
-            alunos.Add(new Aluno("Everton", "1234567890", "2009108320", "Engenharia", "10º", padrao));
-            alunos.Add(new Aluno("Paulo", "1345173491", "2009112450", "Nutricao", "5º", padrao));
-            alunos.Add(new Aluno("Amanda", "1531233491", "20429108450", "Direito", "3º", padrao));
-            */
-
-
-            int x = 0;
+            bool c = true;
+            int x;
             do
             {
                 //CORRIGIR A ENTRADA REPETIDA e mostrar todos os dados do aluno + veiculo. => ok
@@ -521,27 +505,32 @@ namespace ControleDeEstacionamento.Menus
                     Console.WriteLine("\n[1] Entrada \n[2] Saída \n[3] Visualizar Veiculos Estacionados \n[4] Fechar Programa");
                     x = int.Parse(Console.ReadLine());
 
-                    switch (x)
+                    if (x < 1 || x > 4)
                     {
-                        case 4:
-                            Environment.Exit(0);
-                            break;
-
-                        case 1:
-                            Entrada();
-                            break;
-
-                        case 2:
-                            Saida();
-                            break;
-
-                        case 3:
-                            Estacionados();
-                            break;
+                        Console.WriteLine("OPÇÃO INVÁLIDA! 13");
+                        Console.ReadLine();
                     }
+                    else
+                    {
+                        switch (x)
+                        {
+                            case 4:
+                                c = false;
+                                break;
 
-                    Console.WriteLine("OPÇÃO INVÁLIDA! 13");
-                    Console.ReadLine();
+                            case 1:
+                                Entrada();
+                                break;
+
+                            case 2:
+                                Saida();
+                                break;
+
+                            case 3:
+                                Estacionados();
+                                break;
+                        }
+                    }                    
                 }
                 catch (Exception)
                 {
@@ -549,115 +538,113 @@ namespace ControleDeEstacionamento.Menus
                     Console.ReadLine();
                 }
 
-            } while (x < 1 || x > 4);
-
-
-
-
+            } while (c);
         }
 
         public void Entrada()
         {
+            bool c = true;
             int x;
 
             if (vagas == 0)
             {
                 Console.WriteLine("Limite de vagas esgotado! \nAguardar saída de veículos!");
                 Console.ReadLine();
-                TelaInicialConsulta();
-            }            
-
-            do
+            }
+            else
             {
-                try
+                do
                 {
-                    Console.WriteLine("\nEscolha a opção de consulta: ");
-                    Console.WriteLine("\n[1] Placa \n[2] Nome");
-                    x = int.Parse(Console.ReadLine());
-
-                    if (x == 1)
+                    try
                     {
-                        Console.Write("\nInforme a Placa do veículo: ");
-                        string placa = Console.ReadLine().ToUpper();
+                        Console.Clear();
 
-                        bool v = ConfirmarPlaca(placa, alunos);
-                        bool e = EstaEstacionadoPlaca(placa, alunos, veiculosEstacionados);
+                        Console.WriteLine("\nEscolha a opção de consulta: ");
+                        Console.WriteLine("\n[1] Placa \n[2] Nome");
+                        x = int.Parse(Console.ReadLine());
 
-                        if (!v)
+                        if( x < 1 || x > 2)
                         {
-                            Console.WriteLine("\nVeículo não cadastrado, aluno deve porcurar o setor de cadastro de veículos!\nENTRADA NÃO AUTORIZADA ");
+                            Console.WriteLine("OPÇÃO INVÁLIDA! 15");
                             Console.ReadLine();
-                            TelaInicialConsulta();
-                        }
-                        else if (e)
-                        {
-                            Console.WriteLine("\nAluno se encontra 'estacionado' com outro veículo ou alguém com o veículo do Aluno entrou no estacionamento! !! \nENTRADA NÃO AUTORIZADA");
-                            Console.ReadLine();
-                            TelaInicialConsulta();
-                        }
-                        else
-                        {
-                            veiculosEstacionados.Add(placa);
-                            vagas--;
-                            Console.WriteLine("\nENTRADA AUTORIZADA! ");
-                            Console.ReadLine();
-                            //Entrada(veiculosEstacionados, placa);                          
-                            TelaInicialConsulta();
+                            c = false;
                         }
 
+                       else if (x == 1)
+                        {
+                            Console.Write("\nInforme a Placa do veículo: ");
+                            string placa = Console.ReadLine().ToUpper();
+
+                            bool v = ConfirmarPlaca(placa, alunos);
+                            bool e = EstaEstacionadoPlaca(placa, alunos, veiculosEstacionados);
+
+                            if (!v)
+                            {
+                                Console.WriteLine("\nVeículo não cadastrado, aluno deve porcurar o setor de cadastro de veículos!\nENTRADA NÃO AUTORIZADA ");
+                                Console.ReadLine();
+                                c = false;
+                            }
+                            else if (e)
+                            {
+                                Console.WriteLine("\nAluno se encontra 'estacionado' com outro veículo ou alguém com o veículo do Aluno entrou no estacionamento! !! \nENTRADA NÃO AUTORIZADA");
+                                Console.ReadLine();
+                                c = false;
+                            }
+                            else
+                            {
+                                veiculosEstacionados.Add(placa);
+                                vagas--;
+                                Console.WriteLine("\nENTRADA AUTORIZADA! ");
+                                Console.ReadLine();
+                                c = false;
+                            }
+
+                        }
+
+                        else if (x == 2)
+                        {
+
+                            Console.Write("\nInforme o nome do aluno: ");
+                            string nome = Console.ReadLine().ToUpper();
+
+                            bool v = ConfirmarAluno(nome, alunos);
+                            bool e = EstaEstacionadoNome(nome, alunos, veiculosEstacionados);
+
+                            if (!v)
+                            {
+                                Console.WriteLine("\nAluno não cadastrado!! \nENTRADA NÃO AUTORIZADA");
+                                Console.ReadLine();
+                                c = false;
+                            }
+                            else if (e)
+                            {
+                                Console.WriteLine("\nAluno se encontra 'estacionado' com outro veículo ou alguém com o veículo do Aluno entrou no estacionamento! !! \nENTRADA NÃO AUTORIZADA");
+                                Console.ReadLine();
+                                c = false;
+                            }
+                            else
+                            {
+                                veiculosEstacionados.Add(nome);
+                                vagas--;
+                                Console.WriteLine("\nENTRADA AUTORIZADA! ");
+                                Console.ReadLine();                                                    
+                                c = false;
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("OPÇÃO INVÁLIDA! 16");
+                        Console.ReadLine();
                     }
 
-                    if (x == 2)
-                    {
-
-                        Console.Write("\nInforme o nome do aluno: ");
-                        string nome = Console.ReadLine().ToUpper();
-
-                        bool v = ConfirmarAluno(nome, alunos);
-                        bool e = EstaEstacionadoNome(nome, alunos, veiculosEstacionados);
-
-                        if (!v)
-                        {
-                            Console.WriteLine("\nAluno não cadastrado!! \nENTRADA NÃO AUTORIZADA");
-                            Console.ReadLine();
-                            TelaInicialConsulta();
-                        }
-                        else if (e)
-                        {
-                            Console.WriteLine("\nAluno se encontra 'estacionado' com outro veículo ou alguém com o veículo do Aluno entrou no estacionamento! !! \nENTRADA NÃO AUTORIZADA");
-                            Console.ReadLine();
-                            TelaInicialConsulta();
-                        }                        
-                        else
-                        {
-                            veiculosEstacionados.Add(nome);
-                            vagas--;
-                            Console.WriteLine("\nENTRADA AUTORIZADA! ");
-                            Console.ReadLine();
-                            //Entrada(veiculosEstacionados, nome);                            
-                            TelaInicialConsulta();
-                        }
-
-                    }
-
-
-                    Console.WriteLine("OPÇÃO INVÁLIDA! 15");
-                    Console.ReadLine();
-
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("OPÇÃO INVÁLIDA! 16");
-                    Console.ReadLine();
-                    x = 0;
-                }
-
-            } while (x < 1 || x > 2);
-
+                } while (c);
+            }
         }
 
         public void Saida()
         {
+            bool c = true;
             int x = 0;
             do
             {
@@ -668,32 +655,35 @@ namespace ControleDeEstacionamento.Menus
                     Console.WriteLine("\n[1] Placa \n[2] Nome");
                     x = int.Parse(Console.ReadLine());
 
-                    if (x == 1)
+                    if(x < 1 || x > 2)
+                    {
+                        Console.WriteLine("OPÇÃO INVÁLIDA! 17");
+                        Console.ReadLine();
+                        c = false;
+                    }
+
+                    else if (x == 1)
                     {
                         Console.Write("\nInforme a Placa do veículo: ");
                         string placa = Console.ReadLine().ToUpper();
 
                         bool v = ConfirmarPlacaSaida(placa, veiculosEstacionados);
                         
-
                         if (!v)
                         {
                             Console.WriteLine("\nPlaca não encontrada \nSAÍDA NÃO AUTORIZADA ");
                             Console.ReadLine();
-                            TelaInicialConsulta();
+                            c = false;
                         }
-
                         else
-                        {
-                            //Saida(veiculosEstacionados, placa);
+                        {                            
                             veiculosEstacionados.Remove(placa);
                             vagas++;
-                            TelaInicialConsulta();
+                            c = false;
                         }
-
                     }
 
-                    if (x == 2)
+                    else if (x == 2)
                     {
 
                         Console.Write("\nInforme o nome do aluno: ");
@@ -705,21 +695,16 @@ namespace ControleDeEstacionamento.Menus
                         {
                             Console.WriteLine("\nNome não encontrado! \nSAÍDA NÃO AUTORIZADA");
                             Console.ReadLine();
-                            TelaInicialConsulta();
+                            c = false;
                         }
 
                         else
-                        {
-                            //Saida(veiculosEstacionados, nome);
+                        {                            
                             veiculosEstacionados.Remove(nome);
                             vagas++;
-                            TelaInicialConsulta();
+                            c = false;
                         }
-
-                    }
-
-                    Console.WriteLine("OPÇÃO INVÁLIDA! 17");
-                    Console.ReadLine();
+                    }                   
                 }
                 catch (Exception)
                 {
@@ -727,7 +712,7 @@ namespace ControleDeEstacionamento.Menus
                     Console.ReadLine();
                 }
 
-            } while (x < 1 || x > 2);
+            } while (c);
 
         }
 
@@ -743,8 +728,6 @@ namespace ControleDeEstacionamento.Menus
             }
 
             Console.ReadLine();
-            TelaInicialConsulta();
-
         }
 
 
@@ -804,26 +787,7 @@ namespace ControleDeEstacionamento.Menus
             }
 
             return false;
-        }
-
-        /*
-        public void Entrada(List<string> veiculosEstacionados, string estacionar)
-        {
-            veiculosEstacionados.Add(estacionar);
-            Console.WriteLine("ENTRADA AUTORIZADA! ");
-            Console.ReadLine();
-
-        }
-        
-
-        public void Saida(List<string> veiculosEstacionados, string estacionar)
-        {
-            veiculosEstacionados.Remove(estacionar);
-            Console.WriteLine("SAÍDA AUTORIZADA! ");
-            Console.ReadLine();
-
-        }
-        */
+        }       
 
         public bool ConfirmarPlacaSaida(string placa, List<string> veiculosEstacionados)
         {
@@ -849,8 +813,6 @@ namespace ControleDeEstacionamento.Menus
             }
 
             return false;
-        }
-
-        //criar uma conferência se o aluno já estar estacionado
+        }        
     }
 }
